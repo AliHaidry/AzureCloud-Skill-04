@@ -9,6 +9,11 @@ on:
         required: true
         default: "apply"
 
+env:
+  TERRAFORM_PATH: "src/Infrastructure"
+  AZURE_FUNCTIONAPP_NAME: func-python-smah01
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "src/Azure Functions"               
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -33,12 +38,10 @@ jobs:
         with:
           terraform_version: "1.0.0"
 
-      - name: Copy Terraform Files
-        run: |
-          cp -r src/Infrastructure/*
 
       - name: Configure Terraform Backend
         run: |
+          cd ${{ env.TERRAFORM_PATH }}
           terraform init -backend-config="storage_account_name=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" \
                          -backend-config="container_name=${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
                          -backend-config="access_key=${{ secrets.ARM_ACCESS_KEY }}"
@@ -49,6 +52,7 @@ jobs:
 
       - name: Apply or Destroy
         run: |
+          cd ${{ env.TERRAFORM_PATH }}
           action="${{ steps.select_action.outputs.action }}"
           if [ "$action" == "apply" ]; then
             terraform apply -auto-approve
@@ -61,6 +65,7 @@ jobs:
 
       - name: Manage Terraform State
         run: |
+          cd ${{ env.TERRAFORM_PATH }}
           action="${{ steps.select_action.outputs.action }}"
           if [ "$action" == "apply" ]; then
             terraform state pull > terraform.tfstate

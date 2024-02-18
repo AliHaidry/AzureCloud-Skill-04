@@ -11,7 +11,7 @@ terraform {
 # Configure the backend for storing Terraform state
 backend "azurerm" {
   resource_group_name  = "terraformstate"
-  storage_account_name = "terraformstate6177"
+  storage_account_name = "terraformstate1020"
   container_name       = "tfstate"
   key                  = "terraform.tfstate"
 }
