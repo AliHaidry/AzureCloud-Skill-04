@@ -65,6 +65,7 @@ jobs:
 
       - name: Manage Terraform State
         run: |
+          cd ${{ env.TERRAFORM_PATH }}
           action="${{ steps.select_action.outputs.action }}"
           if [ "$action" == "apply" ]; then
             terraform state pull > terraform.tfstate
