@@ -46,9 +46,4 @@ resource "azurerm_function_app" "functions" {
   site_config {
     linux_fx_version = "python|3.9"
   }
-
-    identity {
-        type = "SystemAssigned"
-    }
-
 }
