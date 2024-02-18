@@ -34,8 +34,7 @@ jobs:
           terraform_version: "1.0.0"
 
       - name: Getting Terraform Files
-        uses: actions/checkout@v3
-        with:
+        run: |
           path: ./src/Infrastucture
 
       - name: Configure Terraform Backend
