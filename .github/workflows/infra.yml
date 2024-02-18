@@ -57,7 +57,6 @@ jobs:
           if [ "$action" == "apply" ]; then
             terraform apply -auto-approve
           elif [ "$action" == "destroy" ]; then
-          cd ${{ env.TERRAFORM_PATH }}
             terraform destroy -auto-approve
           else
             echo "Invalid action specified: $action"

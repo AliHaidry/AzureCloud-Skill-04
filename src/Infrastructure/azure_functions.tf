@@ -29,6 +29,12 @@ resource "azurerm_app_service_plan" "functions" {
     tier = "Dynamic"
     size = "Y1"
   }
+
+  lifecycle {
+    ignore_changes = [
+      kind
+    ]
+  }
 }
 
 resource "azurerm_function_app" "functions" {
