@@ -36,7 +36,8 @@ resource "azurerm_function_app" "functions" {
     resource_group_name       = azurerm_resource_group.rg.name
     app_service_plan_id       = azurerm_app_service_plan.functions.id
     storage_account_name       = var.function_storage_name
-    storage_account_access_key = var.function_storage_access_key.storage.primary_access_key
+    storage_account_access_key = azurerm_storage_account.functions.primary_access_key
+    #storage_account_access_key = var.function_storage_access_key.storage.primary_access_key
     # Remove the storage_connection_string attribute
     # storage_connection_string = azurerm_storage_account.functions.primary_connection_string
     os_type                   = "linux"
