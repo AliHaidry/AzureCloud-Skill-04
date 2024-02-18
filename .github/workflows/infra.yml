@@ -1,0 +1,79 @@
+name: Terraform Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action to perform (apply/destroy)"
+        required: true
+        default: "apply"
+
+env:
+  - name: functions-path
+    value: "src/Azure Functions"
+  - name: terraform-path
+    value: "src/Infrastructure"
+
+  - name: appName
+    value: func-python-smah01
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Azure CLI
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.57.0
+          inlineScript: |
+            az --version
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.0.0"
+
+      - name: Copy Terraform Files
+        run: |
+          cp -r $(terraform-path)/*
+
+      - name: Configure Terraform Backend
+        run: |
+          terraform init -backend-config="storage_account_name=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" \
+                         -backend-config="container_name=${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
+                         -backend-config="access_key=${{ secrets.ARM_ACCESS_KEY }}"
+
+      - name: Select Action
+        id: select_action
+        run: echo "::set-output name=action::${{ github.event.inputs.action }}"
+
+      - name: Apply or Destroy
+        run: |
+          action="${{ steps.select_action.outputs.action }}"
+          if [ "$action" == "apply" ]; then
+            terraform apply -auto-approve
+          elif [ "$action" == "destroy" ]; then
+            terraform destroy -auto-approve
+          else
+            echo "Invalid action specified: $action"
+            exit 1
+          fi
+
+      - name: Manage Terraform State
+        run: |
+          action="${{ steps.select_action.outputs.action }}"
+          if [ "$action" == "apply" ]; then
+            terraform state pull > terraform.tfstate
+            # Optionally, you can upload the state file to a storage account or another backend
+          elif [ "$action" == "destroy" ]; then
+            # Clean up state after destroying infrastructure
+            rm -f terraform.tfstate
+          fi
