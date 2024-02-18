@@ -1,0 +1,55 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output
+# Ignore IDE and editor files
+.vscode/
+.idea/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore sensitive or environment-specific files
+.env
+config.js
+
+# Ignore compiled binaries or executables
+*.exe
+*.dll
+*.so
+
+# Ignore package-lock.json for npm
+package-lock.json
+
+# Ignore yarn.lock for Yarn
+yarn.lock
+
+# Ignore Terraform folders
+.terraform/
+.tfstate
+.tfstate.backup
+dist/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore sensitive or environment-specific files
+.env
+config.js
+
+# Ignore compiled binaries or executables
+*.exe
+*.dll
+*.so
+
+# Ignore package-lock.json for npm
+package-lock.json
+
+# Ignore yarn.lock for Yarn
+yarn.lock
