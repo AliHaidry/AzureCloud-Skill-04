@@ -36,7 +36,7 @@ jobs:
       - name: Getting Terraform Files
         uses: actions/checkout@v3
         with:
-          repository: ./src/Infrastucture
+          path: ./src/Infrastucture
 
       - name: Configure Terraform Backend
         run: |
