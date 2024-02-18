@@ -9,12 +9,6 @@ on:
         required: true
         default: "apply"
 
-env:
-  - name: functions-path
-    value: "src/Azure Functions"
-  - name: terraform-path
-    value: "src/infrastructure"
-
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -40,7 +34,9 @@ jobs:
           terraform_version: "1.0.0"
 
       - name: Getting Terraform Files
-        path: ./src/Infrastucture
+        uses: actions/checkout@v3
+        with:
+          repository: ./src/Infrastucture
 
       - name: Configure Terraform Backend
         run: |
