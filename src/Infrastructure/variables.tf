@@ -27,8 +27,3 @@ variable "function_app_insights_name" {
   type    = string
   default = "appi-unc-python-smah01"
 }
-
-variable "storage_name" {
-  type    = string
-  default = "stfilesmah01"
-}
