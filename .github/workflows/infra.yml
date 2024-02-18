@@ -9,6 +9,12 @@ on:
         required: true
         default: "apply"
 
+env:
+  - name: functions-path
+    value: "src/Azure Functions"
+  - name: terraform-path
+    value: "src/infrastructure"
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -32,6 +38,8 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.0.0"
+
+      - uses: "$(terraform-path)"
 
       - name: Configure Terraform Backend
         run: |
