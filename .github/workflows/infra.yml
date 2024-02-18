@@ -39,7 +39,8 @@ jobs:
         with:
           terraform_version: "1.0.0"
 
-      - uses: "$(terraform-path)"
+      - name: Getting Terraform Files
+        path: ./src/Infrastucture
 
       - name: Configure Terraform Backend
         run: |
