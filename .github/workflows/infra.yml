@@ -35,7 +35,7 @@ jobs:
 
       - name: Copy Terraform Files
         run: |
-          cp -r src/Infrastructure/*
+          cp src/Infrastructure/*
 
       - name: Configure Terraform Backend
         run: |
