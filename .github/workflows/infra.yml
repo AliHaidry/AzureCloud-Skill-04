@@ -33,11 +33,6 @@ jobs:
         with:
           terraform_version: "1.0.0"
 
-      - name: Copy Terraform Files
-        run: |
-          cp src/Infrastructure/* TerraformInfra/
-
-
       - name: Configure Terraform Backend
         run: |
           terraform init -backend-config="storage_account_name=${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" \
