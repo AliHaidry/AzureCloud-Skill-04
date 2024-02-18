@@ -1,5 +1,6 @@
 name: Terraform Workflow
 
+
 on:
   workflow_dispatch:
     inputs:
@@ -7,15 +8,6 @@ on:
         description: "Action to perform (apply/destroy)"
         required: true
         default: "apply"
-
-env:
-  - name: functions-path
-    value: "src/Azure Functions"
-  - name: terraform-path
-    value: "src/Infrastructure"
-
-  - name: appName
-    value: func-python-smah01
 
 jobs:
   terraform:
@@ -43,7 +35,7 @@ jobs:
 
       - name: Copy Terraform Files
         run: |
-          cp -r $(terraform-path)/*
+          cp -r src/Infrastructure/*
 
       - name: Configure Terraform Backend
         run: |
