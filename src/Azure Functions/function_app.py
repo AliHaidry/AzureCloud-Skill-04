@@ -1,6 +1,6 @@
 import logging
 import datetime
-import pytz
+import requests
 import azure.functions as func
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
@@ -32,8 +32,14 @@ def timer_function(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(f"Current time is: {current_time}")
 
 
-@app.route(route="current_time_est")
-def timer_function_est(req: func.HttpRequest) -> func.HttpResponse:
-    eastern = pytz.timezone('US/Eastern')
-    current_time = datetime.datetime.now(eastern).strftime("%Y-%m-%d %H:%M:%S")
-    return func.HttpResponse(f"The current time in EST is: {current_time}")   
+@app.route(route="population")
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    population_data = fetch_population_data()
+    return func.HttpResponse(f"The current population of Canada is: {population_data}")
+
+def fetch_population_data():
+    # Fetch population data from a reliable source
+    response = requests.get("https://world-population.p.rapidapi.com/population?country_name=Canada")
+    data = response.json()
+    population = data['body']['population']
+    return population
