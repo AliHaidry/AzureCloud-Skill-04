@@ -2,12 +2,12 @@ name: Deploy Python Function to Azure Function App
 
 
 on:
-    workflow_dispatch:
-      inputs:
-        action:
-          description: "Action to perform on the function app"
-          required: true
-          default: "push code"  
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action to perform on the function app"
+        required: true
+        default: "push code"  
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'func-python-smah01'   # set this to your function app name on Azure
