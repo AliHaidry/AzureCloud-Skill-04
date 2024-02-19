@@ -33,9 +33,10 @@ def timer_function(req: func.HttpRequest) -> func.HttpResponse:
 
 
 @app.route(route="population")
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def can_population(req: func.HttpRequest) -> func.HttpResponse:
     population_data = fetch_population_data()
     return func.HttpResponse(f"The current population of Canada is: {population_data}")
+
 
 def fetch_population_data():
     # Fetch population data from a reliable source
