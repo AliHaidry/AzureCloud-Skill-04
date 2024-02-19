@@ -1,5 +1,6 @@
-import azure.functions as func
 import logging
+import datetime
+import azure.functions as func
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
@@ -23,3 +24,12 @@ def hero_function(req: func.HttpRequest) -> func.HttpResponse:
              "This HTTP triggered function executed successfully. Hello to the Azure Cloud. Hope this works!!!",
              status_code=200
         )
+    
+@app.route(route="current_time")
+def timer_function(req: func.HttpRequest) -> func.HttpResponse:
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return func.HttpResponse(f"Current time is: {current_time}")
+
+@app.route(route="greetings")
+def greetings_function(req: func.HttpRequest) -> func.HttpResponse:
+    return func.HttpResponse("Hello, Ali. This is the greetings function.")
