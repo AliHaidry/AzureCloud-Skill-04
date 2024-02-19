@@ -22,3 +22,9 @@ variable "function_storage_name" {
   type    = string
   default = "stfuncpythonsmah01"
 }
+
+
+variable "storage_name" {
+  type    = string
+  default = "stfilessmah01"
+}
