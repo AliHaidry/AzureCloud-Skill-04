@@ -26,7 +26,7 @@ def hero_function(req: func.HttpRequest) -> func.HttpResponse:
              status_code=200
         )
 
-@app.route(route="current_time")
+@app.route(route="hero_function2")
 def time_function(req: func.HttpRequest) -> func.HttpResponse:
     eastern = pytz.timezone('US/Eastern')
     current_time = datetime.datetime.now(eastern).strftime("%Y-%m-%d %H:%M:%S")
