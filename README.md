@@ -6,7 +6,7 @@ __infra.yml__ and __function.yml__
 ### Pre-requisites
 Following are the repository secrets to implement the infrastructure.
 - ARM_ACCESS_KEY (**Storage account key** that you create for __terraform state management__)
-- AZURE_CREDENTIALS (**Configure Azure Service Principal"** ) or (**az ad sp create-for-rbac --name <NAME> --role contributor --scopes /subscriptions/<SUBSCRIPTION> --sdk-auth**)
+- AZURE_CREDENTIALS (**Configure Azure Service Principal"** ) or (**az ad sp create-for-rbac --name `NAME` --role contributor --scopes /subscriptions/`SUBSCRIPTION` --sdk-auth**)
 - AZURE_FUNCTIONAPP_PUBLISH_PROFILE (** to manage the CI for code azure funtion code update on __function.py__)
 - AZURE_STORAGE_ACCOUNT_NAME ( **for terraform state management**)
 - AZURE_STORAGE_CONTAINER_NAME (**for terraform state management**)
